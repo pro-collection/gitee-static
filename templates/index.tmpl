@@ -39,7 +39,7 @@
       console.log('success')
       console.log(res)
 
-      const $newElement = $(`<img src="data:image/jpeg;base64,${res.base64}"/>`);//创建元素,返回jQuery对象
+      const $newElement = $(`<img src="${res.download_url}"/>`);//创建元素,返回jQuery对象
       $('div.right').append($newElement)
 
     }
