@@ -17,16 +17,32 @@
 </head>
 <body>
 <div id="container">
-    <p>可以拖拽上传文件：</p>
-    <input id="fileupload" type="file" name="file"
-           multiple
-           data-url="/api/upload"
-           data-sequential-uploads="true"
-           data-form-data='{"script": "true"}'>
+    <div>
+        <p>可以拖拽上传文件：</p>
+        <input id="fileupload" type="file" name="file"
+               multiple
+               data-url="/api/upload"
+               data-sequential-uploads="true"
+               data-form-data='{"script": "true"}'>
+    </div>
+
+    <div class="right">
+    </div>
 </div>
+
+
 </body>
 
 <script>
-  $('#fileupload').fileupload();
+  $('#fileupload').fileupload({
+    success: function (res) {
+      console.log('success')
+      console.log(res)
+
+      const $newElement = $(`<img src="data:image/jpeg;base64,${res.base64}"/>`);//创建元素,返回jQuery对象
+      $('div.right').append($newElement)
+
+    }
+  })
 </script>
 </html>
