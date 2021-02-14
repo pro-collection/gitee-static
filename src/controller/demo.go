@@ -1,7 +1,7 @@
-package main
+package controller
 
 import (
-	"fmt"
+	"github.com/gin-gonic/gin"
 	"github.com/levigross/grequests"
 	"log"
 )
@@ -14,8 +14,7 @@ type User struct {
 	Headers Headers `json:"headers"`
 }
 
-func main() {
-
+func Demo(c *gin.Context) {
 	resp, err := grequests.Get("http://httpbin.org/get", nil)
 	// You can modify the request by passing an optional RequestOptions struct
 
@@ -24,8 +23,10 @@ func main() {
 	}
 
 	user := User{}
-	fmt.Println(resp.String())
 	_ = resp.JSON(&user)
 
-	fmt.Println(user.Headers.AcceptEncoding)
+	c.JSON(200, gin.H{
+		"user": user,
+	})
+
 }
