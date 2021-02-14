@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>拖拽上传文件</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-file-upload/9.9.4/js/jquery.iframe-transport.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-file-upload/9.9.4/js/vendor/jquery.ui.widget.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/blueimp-file-upload/9.9.4/js/jquery.fileupload.min.js"></script>
+    <style>
+        #fileupload {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #c3baba;;
+        }
+    </style>
 </head>
 <body>
-
+<div id="container">
+    <p>可以拖拽上传文件：</p>
+    <input id="fileupload" type="file" name="file"
+           multiple
+           data-url="/api/upload"
+           data-sequential-uploads="true"
+           data-form-data='{"script": "true"}'>
+</div>
 </body>
+
+<script>
+  $('#fileupload').fileupload();
+</script>
 </html>
