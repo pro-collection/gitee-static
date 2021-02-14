@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/base64"
 	"fmt"
+	"gitee-static/src/config"
 	"github.com/gin-gonic/gin"
 	"github.com/levigross/grequests"
 	"github.com/tidwall/gjson"
@@ -30,12 +31,13 @@ func Upload(c *gin.Context) {
 		fileName,
 	)
 	//	https://gitee.com/api/v5/repos/yanleweb/static/contents/hd_client/demo-2.jpg
+
 	res, err := grequests.Post(requestUrl, &grequests.RequestOptions{
 		Headers: map[string]string{
 			"Content-Length": "multipart/form-data; boundary=<calculated when request is sent>",
 		},
 		Data: map[string]string{
-			"access_token": "7a6fab06411e866dcf4c722223f79495",
+			"access_token": config.Get().AccessToken,
 			"message":      fileName,
 			"content":      sourceString,
 		},
