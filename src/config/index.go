@@ -8,6 +8,9 @@ import (
 
 type Config struct {
 	AccessToken string `yaml:"access_token"`
+	Owner       string `yaml:"owner"`
+	Repository  string `yaml:"repository"`
+	Path        string `yaml:"path"`
 }
 
 var config *Config

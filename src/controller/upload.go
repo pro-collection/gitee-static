@@ -18,16 +18,19 @@ func Upload(c *gin.Context) {
 	dist := make([]byte, 50000000) //开辟存储空间
 	n, _ := file.Read(dist)
 	sourceString := base64.StdEncoding.EncodeToString(dist[:n])
-	//c.JSON(http.StatusOK, gin.H{
-	//	"base64": sourceString,
-	//})
 
 	fileName := fmt.Sprintf("%d-%s", time.Now().UnixNano()/1e6, fileHeader.Filename)
+	urlPath := fmt.Sprintf(
+		"https://gitee.com/api/v5/repos/%s/%s/contents/%s/",
+		config.Get().Owner,
+		config.Get().Repository,
+		config.Get().Path,
+	)
 
 	// 请求
 	requestUrl := fmt.Sprintf(
 		"%s%s",
-		"https://gitee.com/api/v5/repos/yanleweb/static/contents/hd_client/",
+		urlPath,
 		fileName,
 	)
 	//	https://gitee.com/api/v5/repos/yanleweb/static/contents/hd_client/demo-2.jpg
