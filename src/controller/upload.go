@@ -15,7 +15,7 @@ func Upload(c *gin.Context) {
 	fileHeader, _ := c.FormFile("file")
 	file, _ := fileHeader.Open()
 
-	dist := make([]byte, 50000000) //开辟存储空间
+	dist := make([]byte, fileHeader.Size) //开辟存储空间
 	n, _ := file.Read(dist)
 	sourceString := base64.StdEncoding.EncodeToString(dist[:n])
 
